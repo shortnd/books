@@ -3,6 +3,7 @@ h1 {
 }
 
 .bookcover {
+  display: block;
   height: 300px;
   width: auto;
 }
