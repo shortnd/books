@@ -5,6 +5,11 @@ Books
 {% endblock title %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    <div>
+      <a href="{% url 'book_create' %}">Add Book</a>
+    </div>
+  {% endif %}
   {% for book in books %}
   <div>
     <h2>

@@ -20,6 +20,9 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={"pk": self.pk})
 
+    def get_update_url(self):
+        return reverse('book_update_view', kwargs={"pk": self.pk})
+
     def __str__(self):
       return self.title
 

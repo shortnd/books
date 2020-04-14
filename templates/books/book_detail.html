@@ -20,5 +20,11 @@
       {% endfor %}
     </ul>
   </div>
+  {% if user.is_authenticated %}
+    <div>
+      <a href="{{ book.get_update_url }}" class="btn btn-success">Edit</a>
+      <a href="{% url 'book_delete_view' book.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+  {% endif %}
 </div>
 {% endblock content %}
