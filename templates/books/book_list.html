@@ -7,8 +7,13 @@ Books
 {% block content %}
   {% if user.is_authenticated %}
     <div>
-      <a href="{% url 'book_create' %}">Add Book</a>
+      <a class="btn btn-success" href="{% url 'book_create' %}">Add Book</a>
     </div>
+    {% if not perms.books.special_status %}
+      <div>
+        <a href="{% url 'orders' %}" class="btn btn-success">Purchase All Books</a>
+      </div>
+    {% endif %}
   {% endif %}
   {% for book in books %}
   <div>
