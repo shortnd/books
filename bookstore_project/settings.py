@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import socket
+from ast import literal_eval
 
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
@@ -21,6 +22,7 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='production')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ADMINS = literal_eval(os.environ.get("ADMIN_EMAILS"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'simple_history',
     'debug_toolbar',
+    'admin_honeypot',
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
@@ -206,3 +209,4 @@ if ENVIRONMENT == 'production':
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECURE_REFERRER_POLICY = 'strict-origin'
