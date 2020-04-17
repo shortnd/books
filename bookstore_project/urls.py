@@ -31,7 +31,8 @@ urlpatterns = [
     path('books/', include('books.urls')),
     path('orders/', include('orders.urls')),
     path('api/', include('apis.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+# + static(settings.STATIC_URL, document_root=settings.AWS_STATIC_LOCATION + '/')
 
 if settings.DEBUG:
   import debug_toolbar
