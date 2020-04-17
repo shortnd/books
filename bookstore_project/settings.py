@@ -56,15 +56,17 @@ INSTALLED_APPS = [
     'simple_history',
     'debug_toolbar',
     'admin_honeypot',
+    'rest_framework',
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'books.apps.BooksConfig',
     'orders.apps.OrdersConfig',
+    'apis.apps.ApisConfig',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,12 +77,30 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_SECONDS = 900
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
+MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
+MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_bmemcached.memcached.BMemcached',
+        'TIMEOUT': None,
+        'LOCATION': MEMCACHE_SERVERS,
+        'OPTIONS': {
+            'username': MEMCACHE_USERNAME,
+            'password': MEMCACHE_PASSWORD
+        }
+    }
+}
+
+CACHE_TTL = 60 * 15
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
