@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
@@ -88,17 +88,17 @@ MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
 MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
 MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_bmemcached.memcached.BMemcached',
-        'TIMEOUT': None,
-        'LOCATION': MEMCACHE_SERVERS,
-        'OPTIONS': {
-            'username': MEMCACHE_USERNAME,
-            'password': MEMCACHE_PASSWORD
-        }
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_bmemcached.memcached.BMemcached',
+#         'TIMEOUT': None,
+#         'LOCATION': MEMCACHE_SERVERS,
+#         'OPTIONS': {
+#             'username': MEMCACHE_USERNAME,
+#             'password': MEMCACHE_PASSWORD
+#         }
+#     }
+# }
 
 CACHE_TTL = 60 * 15
 
