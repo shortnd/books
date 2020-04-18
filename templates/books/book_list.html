@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block title %}
+Books
+{% endblock title %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <div>
+      <a class="btn btn-success" href="{% url 'book_create' %}">Add Book</a>
+    </div>
+    {% if not perms.books.special_status %}
+      <div>
+        <a href="{% url 'orders' %}" class="btn btn-success">Purchase All Books</a>
+      </div>
+    {% endif %}
+  {% endif %}
+  {% for book in books %}
+  <div>
+    <h2>
+      <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+    </h2>
+  </div>
+  {% endfor %}
+{% endblock content %}
