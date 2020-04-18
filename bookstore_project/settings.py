@@ -91,17 +91,17 @@ MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
 MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
 MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_bmemcached.memcached.BMemcached',
-#         'TIMEOUT': None,
-#         'LOCATION': MEMCACHE_SERVERS,
-#         'OPTIONS': {
-#             'username': MEMCACHE_USERNAME,
-#             'password': MEMCACHE_PASSWORD
-#         }
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django_bmemcached.memcached.BMemcached',
+        'TIMEOUT': None,
+        'LOCATION': MEMCACHE_SERVERS,
+        'OPTIONS': {
+            'username': MEMCACHE_USERNAME,
+            'password': MEMCACHE_PASSWORD
+        }
+    }
+}
 
 CACHE_TTL = 60 * 15
 
