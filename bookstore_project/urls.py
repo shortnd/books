@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+from graphql_playground.views import GraphQLPlaygroundView
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
@@ -32,6 +35,8 @@ urlpatterns = [
     path('books/', include('books.urls')),
     path('orders/', include('orders.urls')),
     path('api/', include('apis.urls')),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('playground/', GraphQLPlaygroundView.as_view(endpoint="/graphql/")),
 ]
 # + static(settings.STATIC_URL, document_root=settings.AWS_STATIC_LOCATION + '/')
 

@@ -61,6 +61,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'storages',
     'django_cleanup.apps.CleanupConfig',
+    'corsheaders',
+    'graphene_django',
+    'graphql_playground',
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
@@ -70,10 +73,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -81,30 +85,32 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
-# CACHE_MIDDLEWARE_ALIAS = 'default'
-# CACHE_MIDDLEWARE_SECONDS = 604800
-# CACHE_MIDDLEWARE_KEY_PREFIX = ''
+CORS_ORIGIN_ALLOW_ALL = True
 
-# MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
-# MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
-# MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_bmemcached.memcached.BMemcached',
-#         'TIMEOUT': None,
-#         'LOCATION': MEMCACHE_SERVERS,
-#         'OPTIONS': {
-#             'username': MEMCACHE_USERNAME,
-#             'password': MEMCACHE_PASSWORD
-#         }
-#     }
-# }
+MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
+MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
+MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
 
-# CACHE_TTL = 60 * 15
+CACHES = {
+    'default': {
+        'BACKEND': 'django_bmemcached.memcached.BMemcached',
+        'TIMEOUT': None,
+        'LOCATION': MEMCACHE_SERVERS,
+        'OPTIONS': {
+            'username': MEMCACHE_USERNAME,
+            'password': MEMCACHE_PASSWORD
+        }
+    }
+}
+
+CACHE_TTL = 60 * 15
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
@@ -251,3 +257,7 @@ if ENVIRONMENT == 'production':
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+GRAPHENE = {
+    'SCHEMA': 'bookstore_project.schema.schema'
+}

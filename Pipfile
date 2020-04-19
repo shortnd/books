@@ -26,6 +26,10 @@ boto3 = "==1.12.40"
 django-storages = "==1.9.1"
 django-grappelli = "==2.14.1"
 django-cleanup = "==4.0.0"
+django-cors-headers = "==3.2.1"
+graphene = "==2.1.8"
+graphene-django = "==2.9.1"
+django-graphql-playground = "*"
 
 [requires]
 python_version = "3.7"
