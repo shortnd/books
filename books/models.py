@@ -6,10 +6,10 @@ from django.contrib.auth import get_user_model
 
 class Book(models.Model):
     id = models.UUIDField(
-      primary_key=True,
-      default=uuid.uuid4,
-      editable=False,
-      db_index=True,
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+        db_index=True,
     )
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
@@ -18,7 +18,7 @@ class Book(models.Model):
 
     class Meta:
         permissions = [
-          ('special_status', 'Can read all books',),
+            ('special_status', 'Can read all books',),
         ]
 
     def get_absolute_url(self):
@@ -28,25 +28,28 @@ class Book(models.Model):
         return reverse('book_update_view', kwargs={"pk": self.pk})
 
     def __str__(self):
-      return self.title
+        return self.title
+
 
 class Review(models.Model):
-  id = models.UUIDField(
-    primary_key=True,
-    default=uuid.uuid4,
-    editable=False
-  )
-  book = models.ForeignKey(
-    Book,
-    on_delete=models.CASCADE,
-    related_name='reviews'
-  )
-  review = models.CharField(max_length=255)
-  author = models.ForeignKey(
-    get_user_model(),
-    on_delete=models.CASCADE
-  )
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='reviews'
+    )
+    review = models.CharField(max_length=255)
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE
+    )
 
-  def __str__(self):
-    return self.review
+    def get_absolute_url(self):
+        return reverse('book_detail', kwargs={"pk": self.book.pk})
 
+    def __str__(self):
+        return self.review

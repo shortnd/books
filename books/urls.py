@@ -6,7 +6,10 @@ from books.views import (
   BookCreateView,
   BookUpdateView,
   BookDeleteView,
-  SearchResultsView
+  SearchResultsView,
+  ReviewCreateView,
+  ReviewUpdateView,
+  ReviewDeleteView,
   )
 
 urlpatterns = [
@@ -16,4 +19,7 @@ urlpatterns = [
   path('<uuid:pk>/edit', BookUpdateView.as_view(), name='book_update_view'),
   path('<uuid:pk>/delete/', BookDeleteView.as_view(), name='book_delete_view'),
   path('search/', SearchResultsView.as_view(), name='search_results'),
+  path('<uuid:pk>/review/', ReviewCreateView.as_view(), name='book_review'),
+  path('<uuid:book_pk>/review/<uuid:pk>/update/', ReviewUpdateView.as_view(), name='book_review_edit'),
+  path('<uuid:book_pk>/review/<uuid:pk>/delete/', ReviewDeleteView.as_view(), name='book_review_delete'),
 ]

@@ -25,6 +25,7 @@ django-bmemcached = "==0.3.0"
 boto3 = "==1.12.40"
 django-storages = "==1.9.1"
 django-grappelli = "==2.14.1"
+django-cleanup = "==4.0.0"
 
 [requires]
 python_version = "3.7"

@@ -16,7 +16,13 @@
     <h3>Reviews</h3>
     <ul>
       {% for review in book.reviews.all %}
-      <li>{{ review.review }} ({{ review.author }})</li>
+      <li>
+        {{ review.review }} ({{ review.author }})
+        {% if user.is_authenticated and user == review.author %}
+          <a href="{% url 'book_review_edit' book_pk=book.pk pk=review.pk %}" class="btn btn-success">Edit</a> |
+          <a href="{% url 'book_review_delete' book_pk=book.pk pk=review.pk %}" class="btn btn-danger">Delete</a>
+        {% endif %}
+      </li>
       {% endfor %}
     </ul>
   </div>
@@ -24,6 +30,7 @@
     <div>
       <a href="{{ book.get_update_url }}" class="btn btn-success">Edit</a>
       <a href="{% url 'book_delete_view' book.pk %}" class="btn btn-danger">Delete</a>
+      <a href="{% url 'book_review' book.pk %}">Review</a>
     </div>
   {% endif %}
 </div>

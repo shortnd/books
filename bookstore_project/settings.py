@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'admin_honeypot',
     'rest_framework',
     'storages',
+    'django_cleanup.apps.CleanupConfig',
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
@@ -83,27 +84,27 @@ MIDDLEWARE = [
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 900
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+# CACHE_MIDDLEWARE_SECONDS = 604800
+# CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
-MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
-MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
-MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
+# MEMCACHE_SERVERS = os.environ.get('MEMCACHIER_SERVERS', 'cache:11211')
+# MEMCACHE_USERNAME = os.environ.get('MEMCACHIER_USERNAME', None)
+# MEMCACHE_PASSWORD = os.environ.get('MEMCACHIER_PASSWORD', None)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_bmemcached.memcached.BMemcached',
-        'TIMEOUT': None,
-        'LOCATION': MEMCACHE_SERVERS,
-        'OPTIONS': {
-            'username': MEMCACHE_USERNAME,
-            'password': MEMCACHE_PASSWORD
-        }
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_bmemcached.memcached.BMemcached',
+#         'TIMEOUT': None,
+#         'LOCATION': MEMCACHE_SERVERS,
+#         'OPTIONS': {
+#             'username': MEMCACHE_USERNAME,
+#             'password': MEMCACHE_PASSWORD
+#         }
+#     }
+# }
 
-CACHE_TTL = 60 * 15
+# CACHE_TTL = 60 * 15
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
